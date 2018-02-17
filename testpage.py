@@ -4,6 +4,7 @@ from flask import json
 from flask import jsonify
 from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
+import requests 
 app = Flask(__name__)
 
 GoogleMaps(app, key="AIzaSyCidFr8iYBBvsMPbal07w_PUuN6Xa0uEOA")
