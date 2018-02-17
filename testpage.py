@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def title():
-    return 'This is where our hack stuff will presumably go. Maps or some shit.'
+    return homepage.html
 
 
 @app.route('/map', methods=['GET', 'POST'])
