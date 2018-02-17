@@ -24,6 +24,11 @@ library(lubridate)
 
 ui <- fluidPage(
   
+  fluidRow(
+    column(8, align="center",
+      
+  
+  
   tags$head(
     tags$style(HTML("
       
@@ -40,13 +45,17 @@ ui <- fluidPage(
       body {
         background-color: #f1c40f;
       }
-
+  
     "))
   ),
 
   # titlePanel('pubcRawl'),
+  
   headerPanel("pubcRawl"),
-  google_mapOutput(outputId = "map", height = "800px")
+  actionButton("button", "First Stop"),
+  actionButton("button", "Last Stop"),
+  google_mapOutput(outputId = "map", height = "600px", width="80%")
 )
-    
+)
+)
 shinyApp(ui, server)
