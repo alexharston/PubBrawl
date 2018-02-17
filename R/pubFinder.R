@@ -4,6 +4,8 @@ suppressMessages(library(dplyr))
 suppressMessages(library(tidyr))
 suppressMessages(library(getopt))
 suppressMessages(library(jsonlite))
+suppressMessages(library(httr))
+suppressMessages(library(lubridate))
 
 #==============================================================================#
 #                             FUNCTIONS
@@ -30,6 +32,13 @@ findPubs <- function(x.start, y.start, x.end, y.end, api.key) {
 
 }
 
+# Query API
+#url <- 'http://whatpub.com/'
+#path <- 'api/1/SearchPubs/location=London' #=json'
+#raw.result <- GET(url = url, path = path)
+#rawToChar(raw.result$content)
+
+
 #==============================================================================#
 #                           MAIN
 #==============================================================================#
@@ -44,6 +53,8 @@ findPubs <- function(x.start, y.start, x.end, y.end, api.key) {
 ## End location
 #x.end <- 51.517647
 #y.end <- -0.119974
+#
+#findPubs(x.start, y.start, x.end, y.end, key)
 
 
 #write_json(pubs.df, '/Users/steinhs/privat_projects/HackCity18/pubs.json')
