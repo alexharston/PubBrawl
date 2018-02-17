@@ -1,7 +1,7 @@
 server <- function(input, output){
   
   # Define API key
-  key <- ' AIzaSyBaNsBP0XxPQ3Y0V-WMf7fzj9ZSac2nzak '
+  key <- 'AIzaSyBaNsBP0XxPQ3Y0V-WMf7fzj9ZSac2nzak'
   
   # Test case
   # Start location
