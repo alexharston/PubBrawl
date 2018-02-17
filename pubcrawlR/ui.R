@@ -42,6 +42,14 @@ ui <- fluidPage(
         text-align: center;
       }
 
+      p {
+      font-family: Roboto, sans-serif;
+      font-size:48pt;
+      font-weight:600;
+      color: red;
+      text-align: center;
+      }
+
       body {
         background-color: #f1c40f;
       }
@@ -52,8 +60,22 @@ ui <- fluidPage(
   # titlePanel('pubcRawl'),
   
   headerPanel("pubcRawl"),
-  actionButton("button", "First Stop"),
-  actionButton("button", "Last Stop"),
+  
+  tags$div(
+    tags$p("Do you want to get into a fight?")  
+  ),
+  
+  actionButton("button", "Come at me mate"),
+  actionButton("button", "No"),
+  actionButton("button", "I literally don't care"),
+  
+  tags$div(
+    tags$p("Do you want to have a quality time?")  
+  ),
+  
+  actionButton("button", "Yes"),
+  actionButton("button", "No"),
+  
   google_mapOutput(outputId = "map", height = "600px", width="80%")
 )
 )

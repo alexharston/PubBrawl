@@ -12,7 +12,7 @@ server <- function(input, output){
   x.end <- 51.517647
   y.end <- -0.119974
   
-  pubs <- findPubs(x.start, y.start, x.end, y.end, key)
+  #pubs <- findPubs(x.start, y.start, x.end, y.end, key)
   
   output$map <- renderGoogle_map({
     google_map(data = pubs, key = key, search_box = T) %>%
