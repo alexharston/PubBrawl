@@ -19,7 +19,7 @@ SelectPubsAndGetRoute <- function(pubs, start.coord, end.coord, number_pints, sa
     selected.pubs <- SelectPubs(pubs.crime.dt = pubs, number_pints = number_pints, safe = safe)
 
     # Get polyline for Google
-    google.route <- PlotRoute(selected.pubs.dt = res, start.coord = start.coord, end.coord = end.coord)
+    google.route <- PlotRoute(selected.pubs.dt = selected.pubs, start.coord = start.coord, end.coord = end.coord)
 
     return(google.route)
 

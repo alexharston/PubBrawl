@@ -14,6 +14,7 @@ PlotRoute <- function(selected.pubs.dt, start.coord, end.coord, api.key = "AIzaS
   end.coord <- end.coord
 
   # Get pub coordinates as a list of vectors of length 2 all named stop
+  selected.pubs.dt[, pub := 1:.N]
   pub.coords <- split(selected.pubs.dt[, .(lat, lng, pub)], by = "pub")
   pub.coords <- lapply(pub.coords, function(x) unlist(x[, pub := NULL]))
   names(pub.coords) <- rep("stop", length(pub.coords))
@@ -24,7 +25,6 @@ PlotRoute <- function(selected.pubs.dt, start.coord, end.coord, api.key = "AIzaS
                           optimise_waypoints=TRUE,
                           key = api.key,
                           mode = "walking")
-
 
   return(google.route$routes$overview_polyline)
 
