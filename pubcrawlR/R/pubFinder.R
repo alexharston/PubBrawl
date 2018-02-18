@@ -2,7 +2,7 @@
 #                             FUNCTIONS
 #==============================================================================#
 findPubs <- function(x.start, y.start, x.end, y.end, key) {
-  # Find mindpoint between both locations
+  # Find midpoint between both locations
   x.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[1]
   y.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[2]
 
@@ -19,7 +19,7 @@ findPubs <- function(x.start, y.start, x.end, y.end, key) {
     bind_cols(., pubs.list$results$geometry$location) %>%
     mutate(rating = pubs.list$results$rating,
            price_level = pubs.list$results$price_level)
-  return(pubs.df)
+  return(as.data.table(pubs.df))
 
 }
 

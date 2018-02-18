@@ -11,34 +11,34 @@ suppressMessages(library(data.table))
 #                                   FUNCTIONS
 #==============================================================================#
 
-GetNumberOfCrimes <- function(latitude, longitude, year_month) {
-
-  # Create URL
-  url <- "https://data.police.uk"
-  # path <- 'all-crime?lat=52.629729&lng=-1.131592&date=2017-01'
-  path <- paste0("api/crimes-street/all-crime?lat=", latitude, "&lng=", longitude, "&date=", year_month)
-
-  # Query API
-  raw.result <- GET(url = url, path = path)
-
-  # Parse result into data.table
-  parsed.dt <- as.data.table(fromJSON(content(raw.result,
-                                              type = "text",
-                                              encoding = "UTF-8"), flatten = TRUE))
-
-  # Select certain crimes
-  crime.dt <- parsed.dt[category %in% c("anti-social-behaviour",
-                                        "drugs",
-                                        "violent-crime",
-                                        "possession-of-weapons",
-                                        "public-order",
-                                        "theft-from-the-person")]
-
-  n_crimes <- nrow(crime.dt)
-
-  return(n_crimes)
-
-}
+# GetNumberOfCrimes <- function(latitude, longitude, year_month) {
+#
+#   # Create URL
+#   url <- "https://data.police.uk"
+#   # path <- 'all-crime?lat=52.629729&lng=-1.131592&date=2017-01'
+#   path <- paste0("api/crimes-street/all-crime?lat=", latitude, "&lng=", longitude, "&date=", year_month)
+#
+#   # Query API
+#   raw.result <- GET(url = url, path = path)
+#
+#   # Parse result into data.table
+#   parsed.dt <- as.data.table(fromJSON(content(raw.result,
+#                                               type = "text",
+#                                               encoding = "UTF-8"), flatten = TRUE))
+#
+#   # Select certain crimes
+#   crime.dt <- parsed.dt[category %in% c("anti-social-behaviour",
+#                                         "drugs",
+#                                         "violent-crime",
+#                                         "possession-of-weapons",
+#                                         "public-order",
+#                                         "theft-from-the-person")]
+#
+#   n_crimes <- nrow(crime.dt)
+#
+#   return(n_crimes)
+#
+# }
 
 # ============
 

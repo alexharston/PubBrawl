@@ -7,7 +7,7 @@ suppressMessages(library(data.table))
 #                                   FUNCTIONS
 #==============================================================================#
 
-PlotRoute <- function(selected.pubs.dt, start.coord, end.coord, api.key = "AIzaSyAa55bTPXC1akgwWNm61KT43AsmwI9NZuY") {
+PlotRoute <- function(selected.pubs.dt, start.coord, end.coord, api_key = api_key) {
 
   # Get start and finish coordinates
   start.coord <- start.coord
@@ -23,7 +23,7 @@ PlotRoute <- function(selected.pubs.dt, start.coord, end.coord, api.key = "AIzaS
                           destination = end.coord,
                           waypoints = pub.coords,
                           optimise_waypoints=TRUE,
-                          key = api.key,
+                          key = api_key,
                           mode = "walking")
 
   return(google.route$routes$overview_polyline)

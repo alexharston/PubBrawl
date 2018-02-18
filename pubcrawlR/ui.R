@@ -2,30 +2,34 @@ library(shiny)
 
 library(dplyr)
 library(tidyr)
-library(readr)
 library(rgdal)
 
+library(data.table)
 library(googleway)
 library(geosphere)
 library(getopt)
 library(jsonlite)
 library(httr)
 library(lubridate)
+library(shinythemes)
 
 source('./R/pubFinder.R')
 source('./server.R')
 
 # Define API key
 key <- 'AIzaSyDK0rcvTeq4zig62iTFWSved_FfuKjX0xY'
+#key <- 'AIzaSyCVHKD81q7hEu_pAIOtJ50uzaE5GbAfNoA'
 set_key(key)
 
 # Get stations
 stations <- getStations()
 
 ui <- fluidPage(
+
+    theme = shinytheme("united"),
   
-  fluidRow(
-    column(12, align="center",
+    fluidRow(
+      column(12, align="center",
       
   
   
@@ -36,58 +40,84 @@ ui <- fluidPage(
   
       h1 {
         font-family: 'Lobster', Arial, cursive;
+        font-size: 48;
         font-weight: 300;
         line-height: 1.1;
-        color: #3498db;
+        color: #08589e;
         text-align: center;
       }
 
       p {
       font-family: Roboto, sans-serif;
-      font-size:32pt;
-      font-weight:300;
-      color: white;
+      font-size:16pt;
+      font-weight:600;
+      color: #08589e;
       text-align: center;
       }
 
       body {
-        background-color: #f1c40f;
+        background-color: #fef0d9;
       }
-  
-    "))
-  ),
 
-  # titlePanel('pubcRawl'),
+          "))
+        ),
+
+        # titlePanel('pubcRawl')
+        
+        headerPanel("PubBrawl"),
+        
+        br(),
+        br(),
+        
+        fluidRow(
+          column(width = 4,  
+                 tags$div(
+            tags$p("How many stops?")  
+          ),
+          sliderInput("number_pints", "",
+                      min = 0, max = 10,
+                      value = 5)
+                 ),
+          
+          column(width = 4,
+                 tags$div(
+                   tags$p("Do you want to get into a fight?")  
+                 ),
+                 actionButton("unsafe", "Come at me mate"),
+                 actionButton("safe", "Nah, play it safe"),
+                 actionButton("carefree", "Whatever I'm easy")
+                 ),
+          
+          column(width= 4, 
+                 tags$div(
+                   tags$p("Palaces or gutters?")  
+                 ),
+                 sliderInput("google_review", "",
+                             min = 0, max = 5,
+                             value = 3.5, step = 0.1)
+                 )
+        
+        ),
+        
   
-  headerPanel("PubBrawl"),
-  
-  tags$div(
-    tags$p("Do you want to get into a fight?")  
-  ),
-  
-  actionButton("button", "Come at me mate"),
-  actionButton("button", "No"),
-  actionButton("button", "I literally don't care"),
-  
-  tags$div(
-    tags$p("Do you want to have a quality time?")  
-  ),
-  
-  actionButton("button", "Yes"),
-  actionButton("button", "No"),
-  
-  # Input: Simple integer interval ----
-  sliderInput("integer", "How many pubs?",
-              min = 2, max = 10,
-              value = 1),
  
   # Text input box 
   selectizeInput('start', 'Pub crawl start location', stations$Name, selected = 'Camden Town Station'),
   selectizeInput('end', 'Pub crawl end location', stations$Name, selected = 'Holborn Station'),
-  actionButton('go', 'GO'),
+
+
+   br(),
+   br(),
+        
+   submitButton("Let's Go", icon("refresh")), 
   
-  google_mapOutput(outputId = "map", height = "600px", width="80%")
+        br(),
+        br(),
+        
+        google_mapOutput(outputId = "map", height = "600px", width="80%")
+      )
+  )
 )
-)
-)
+  
+
 shinyApp(ui, server)
