@@ -45,4 +45,4 @@ By hitting the "Let's Go" button, our magic 8-ball machine collects all the pubs
 ## Disclaimer!
 
 This is a tongue-in-cheek product and the creators accept no responsibility for your misadventures!
-
+![Drink aware](/pubcrawlR/drink_aware.png "Drink aware")
