@@ -10,7 +10,7 @@
 
 # Hard coded bits
 
-SelectPubsAndGetRoute <- function(pubs, start.coord, end.coord, number_pints, safe) {
+SelectPubsAndGetRoute <- function(pubs, start.coord, end.coord, number_pints, safe, api_key) {
 
     # Get crime count
     pubs$crime <- sapply(1:nrow(pubs), function(x) GetNumberOfCrimesPoly(latitude = pubs$lat[x], longitude = pubs$lng[x]))
@@ -19,7 +19,7 @@ SelectPubsAndGetRoute <- function(pubs, start.coord, end.coord, number_pints, sa
     selected.pubs <- SelectPubs(pubs.crime.dt = pubs, number_pints = number_pints, safe = safe)
 
     # Get polyline for Google
-    google.route <- PlotRoute(selected.pubs.dt = selected.pubs, start.coord = start.coord, end.coord = end.coord)
+    google.route <- PlotRoute(selected.pubs.dt = selected.pubs, start.coord = start.coord, end.coord = end.coord, api_key = api_key)
 
     return(list(selectedpubs = selected.pubs,
                 polyline = google.route))

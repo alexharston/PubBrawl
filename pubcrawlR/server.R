@@ -1,9 +1,13 @@
-server <- function(input, output, session){
+server <- function(input, output, session) {
  
   library(data.table)
   source("R/getCrime.R")
   source("R/getRoute.R")
   source("R/wrapper.R")
+  source("R/pubFinder.R")
+  
+  # Define API key
+  key <- 'AIzaSyDrdDGXsYogQLn3Wg9ANqZVy4I610e6Ork'
   
   # Test case
   # Start location
@@ -14,8 +18,8 @@ server <- function(input, output, session){
   x.end <- 51.517647
   y.end <- -0.119974
   
-  start.coord <- c(x.start, x.end)
-  end.coord <- c(y.end, y.end)
+  start.coord <- c(x.start, y.start)
+  end.coord <- c(x.end, y.end)
   
   df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
   pubs <- findPubs(x.start, y.start, x.end, y.end, key)
@@ -24,10 +28,9 @@ server <- function(input, output, session){
       start.coord = start.coord,
       end.coord = end.coord,
       number_pints = 5,
-      safe = "safe")
-  
-  # Define API key
-  key <- 'AIzaSyCidFr8iYBBvsMPbal07w_PUuN6Xa0uEOA'
+      safe = "safe",
+      api_key = key)
+
 
   
   output$map <- renderGoogle_map({

@@ -13,7 +13,7 @@ library(jsonlite)
 library(httr)
 library(lubridate)
 
-source('./R/pubFinder.R')
+# source('./R/pubFinder.R')
 source('./server.R')
 
 # Define API key

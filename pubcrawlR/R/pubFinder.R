@@ -19,7 +19,7 @@ findPubs <- function(x.start, y.start, x.end, y.end, key) {
     bind_cols(., pubs.list$results$geometry$location) %>%
     mutate(rating = pubs.list$results$rating,
            price_level = pubs.list$results$price_level)
-  return(pubs.df)
+  return(as.data.table(pubs.df))
 
 }
 
