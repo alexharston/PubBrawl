@@ -17,6 +17,9 @@ SelectPubsAndGetRoute <- function(pubs, start.coord, end.coord, number_pints, sa
 
     # Select pub
     selected.pubs <- SelectPubs(pubs.crime.dt = pubs, number_pints = number_pints, safe = safe)
+    selected.pubs$label <- sprintf('%s <br/> Rating: %s <br/> Crime number: %s',
+                                   selected.pubs$pub_name, selected.pubs$rating,
+                                   selected.pubs$crime)
 
     # Get polyline for Google
     google.route <- PlotRoute(selected.pubs.dt = selected.pubs, start.coord = start.coord, end.coord = end.coord, api_key = api_key)

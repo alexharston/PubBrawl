@@ -31,7 +31,7 @@ server <- function(input, output, session) {
   # PLOT a map with pubs as points and shortest path as blue line
   output$map <- renderGoogle_map({
     google_map(key = key, data = google.polyline$selectedpubs, search_box = F) %>%
-      add_markers(lat = 'lat', lon = 'lng', info_window = 'pub_name') %>%
+      add_markers(lat = 'lat', lon = 'lng', info_window = 'label') %>%
       add_polylines(data = df, polyline = google.polyline$polyline$points, stroke_weight = 9) 
   })
  
@@ -61,7 +61,7 @@ server <- function(input, output, session) {
     print(google.polyline$selectedpubs)
     google_map_update(map_id = 'map') %>%
       clear_markers() %>%
-      add_markers(data = google.polyline$selectedpubs, lat = 'lat', lon = 'lng', info_window = 'pub_name') %>%
+      add_markers(data = google.polyline$selectedpubs, lat = 'lat', lon = 'lng', info_window = 'label') %>%
       clear_polylines() %>%
       add_polylines(data = df, polyline = google.polyline$polyline$points, stroke_weight = 9)    
   })

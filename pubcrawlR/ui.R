@@ -21,7 +21,7 @@ source('./R/pubFinder.R')
 source('./server.R')
 
 # Define API key
-key <- 'AIzaSyBk9UJjKA2prqRBE4_p7zIp7cr9Lya0OKk'
+key <- 'AIzaSyDvsLeENet53BI9rqQT37sOU0AV6M31K1U'
 set_key(key)
 
 # Get stations
@@ -96,7 +96,7 @@ ui <- fluidPage(
                  ),
                  sliderInput("google_review", "",
                              min = 0, max = 5,
-                             value = 3.5, step = 0.1)
+                             value = 3, step = 0.1)
                  )
         
         ),
@@ -126,5 +126,4 @@ ui <- fluidPage(
  )
 )
   
-
 shinyApp(ui, server)
