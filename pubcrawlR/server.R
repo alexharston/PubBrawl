@@ -7,7 +7,7 @@ server <- function(input, output, session) {
   source("R/pubFinder.R")
   
   # Define API key
-  key <- 'AIzaSyCLy4GVOzDlcVW5D7HBLjsbjDyXtES0u6g'
+  # key <- 'AIzaSyBBm8BH5k410AQ9lr6Rm1HrYyyI8X-gULI'
   
   # Test case
   # Start location
@@ -39,13 +39,10 @@ server <- function(input, output, session) {
   # library(sf)
   
   output$map <- renderGoogle_map({
-    google_map(key = key, data = pubs, search_box = F) %>%
-      add_markers(lat = 'lat', lon = 'lng', info_window = 'pub_name') 
-    
-    # 
-    # %>%
-    #   add_polylines(data = df, polyline = "wgpyHfdZa@Gi@SKQLk@ZSfBuB~CmDhCyCrMsN^a@_@`@_AiDGKCAC@y@{Ca@wAIMCAD_@CCEGoAkEzA}AZ[mAmEYeAEWc@wDSHKe@q@oEG]DGBgD@e@AYMSMg@h@UvDe@~@GNBFJPj@LOF@D?HEFP@@FEHIFXFXGYGYROLMBEFFDDDEDLLKtCqCfAiADM?o@M{LIiDCk@v@m@d@a@DY@OQaBP`BTHv@m@zBaAtAw@b@[dBsAROBBv@o@b@a@dDmDx@eADNLr@~AdLl@jEXON@JBn@[hCoArCyAbAi@F?l@Y~Aw@XOTvAv@pER~@Zt@R^HDJBH@VEF?B@NOZS`Ao@ZQf@SnA_@TILBJBTRDvC", stroke_weight = 9) 
-      #add_drawing(drawing_modes = c('circle')) 
+    google_map(key = key, data = google.polyline$selectedpubs, search_box = F) %>%
+      add_markers(lat = 'lat', lon = 'lng', info_window = 'pub_name') %>%
+      add_polylines(data = df, polyline = google.polyline$polyline$points, stroke_weight = 9)
+    # add_drawing(drawing_modes = c('circle'))
     
   })
   

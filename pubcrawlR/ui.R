@@ -17,7 +17,7 @@ library(lubridate)
 source('./server.R')
 
 # Define API key
-key <- 'AIzaSyCLy4GVOzDlcVW5D7HBLjsbjDyXtES0u6g'
+key <- 'AIzaSyCVHKD81q7hEu_pAIOtJ50uzaE5GbAfNoA'
 set_key(key)
 
 ui <- fluidPage(
