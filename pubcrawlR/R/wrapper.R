@@ -24,3 +24,20 @@ SelectPubsAndGetRoute <- function(pubs, start.coord, end.coord, number_pints, sa
     return(google.route)
 
 }
+
+# Script
+
+# source("~/Github/HackCity18/pubcrawlR/R/getCrime.R")
+# source("~/Github/HackCity18/pubcrawlR/R/getRoute.R")
+# source("~/Github/HackCity18/pubcrawlR/R/wrapper.R")
+#
+# pubs <- fread("~/HackCity18pubs.tsv")
+#
+# start.coord <- c(51.534186, -0.138886)
+# end.coord <- c(51.517647, -0.119974)
+#
+# google.polyline <- SelectPubsAndGetRoute(pubs = pubs,
+#                                          start.coord = start.coord,
+#                                          end.coord = end.coord,
+#                                          number_pints = 5,
+#                                          safe = "safe")
