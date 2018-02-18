@@ -24,14 +24,14 @@ getHospRatings <- function(x.start,y.start,x.end,y.end,key){
   # Query google API to find all pubs within a radius around
   pubs.list <- google_places(search_string = 'accident and emergency',
                              location = c(x.mid, y.mid),
-                             radius = 50000,
+                             radius = 10000,
                              #rankby = 'distance',
                              #place_type = c('bar', 'restaurant'),
                              key = key)
   accidentandemergency <- data.frame(unique(pubs.list$results$name),pubs.list$results$geometry$location, pubs.list$results$rating)
   uc.list <- google_places(search_string = 'urgent care centre',
                            location = c(x.mid, y.mid),
-                           radius = 50000,
+                           radius = 10000,
                            #rankby = 'distance',
                            #place_type = c('bar', 'restaurant'),
                            key = key)
@@ -60,7 +60,7 @@ getFinalString <- function(hos_coords,final_frame){
   final_frame$lat <- as.character(final_frame$lat)
   final_frame$long <- as.character(final_frame$long)
   final <- final_frame %>% filter(lat==as.character(hos_coords[[1]]) & long==as.character(hos_coords[[2]]))
-  return(paste0("The nearest A&E to your Pub Brawl (TM) is ",final$centre,".\n It has an average google review of ",final$google_review," and ",round(final$percent_under_4hrs,2),"% of people get seen within 4 hours,\nso you probably won't die."))
+  return(paste0("The nearest A&E to your Pub Brawl (TM) is <b>",final$centre,"</b>. It has an average google review of <b>",final$google_review,"</b> and <b>",round(final$percent_under_4hrs,2),"%</b> of people get seen within 4 hours, so you probably won't die."))
 }
 
 ##### MAIN ##########
