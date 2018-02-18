@@ -19,13 +19,18 @@ findPubs <- function(x.start, y.start, x.end, y.end, key) {
     bind_cols(., pubs.list$results$geometry$location) %>%
     mutate(rating = pubs.list$results$rating,
            price_level = pubs.list$results$price_level)
-  return(as.data.table(pubs.df))
+
+    pubs.dt <- as.data.table(pubs.df)
+
+    quality.pubs.dt <- pubs.dt[rating > quality_threshold]
+
+    if(nrow(quality.pubs.dt) < (1.5 * number_pints)) quality.pubs.dt <- pubs.dt
 
 }
 
 getStations <- function() {
   km.file <- './data/stations.kml'
-  stations <- readOGR(km.file) 
+  stations <- readOGR(km.file)
   return(stations)
 }
 
