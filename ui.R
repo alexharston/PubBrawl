@@ -18,10 +18,11 @@ source("./R/getCrime.R")
 source("./R/getRoute.R")
 source("./R/wrapper.R")
 source('./R/pubFinder.R')
+source('./R/hospitalData.R')
 source('./server.R')
 
 # Define API key
-key <- 'AIzaSyDvsLeENet53BI9rqQT37sOU0AV6M31K1U'
+key <- 'AIzaSyCHPeKBOeV7QrPEPppnkimSpyRFCUsVNSc'
 set_key(key)
 
 # Get stations
