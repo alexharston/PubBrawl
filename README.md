@@ -1,6 +1,6 @@
-# PubBrawwwwwwl!
+# Pub BRawwwwwwl!
 
-## First round on us!
+## First round is on us!
 
 Are you bored by your local pubs? Do you think your neighbouring pubs are too boring because no one wants to fight you for "accidental spilling"? You already tried all the "popular pubcrawl lists" out there and they left you disappointed and empty hearted?
 
@@ -36,6 +36,6 @@ Let's make your journey through the glasses count.
 
 Yes.
 
-By hitting the "Let's Go" button, our magic 8-ball machine collects all the pubs between your endpoints and filters them down by your favoured Google Review Rating. Then we pull last years street-level crime rates around each potential pub to calculate our "Fun score". Depending on your crime preferences, we will sample pubs into our suggestions based on a probabilistic score. At last, we search for a heuristically shortest path between the stopovers so you don't need to walk for too long before the next great drink. This really is PubBrawl!
+By hitting the "Let's Go" button, our magic 8-ball machine collects all the pubs between your endpoints and filters them down by your favoured Google Review Rating. Then we pull last years street-level crime rates around each potential pub to calculate our "Fun score". Depending on your crime preferences, we will sample pubs into our suggestions based on a probabilistic score. At last, we search for a heuristically shortest path between the stopovers so you don't need to walk for too long before the next great drink. This really is Pub BRawl!
 
 
