@@ -10,7 +10,7 @@ To be more precise, the solution to get you to your favourite solution just got 
 
 ## Come again, mate?
 
-Well, yes. Go to pubcrawl.tech right now and plan your next Tuesday night. You start by telling us how many stops your sober brain intends to take before utterly failing counting to ten. Then you select the safety level you feel most comfortable with and also which kind of places you like. We surely don't want you to leave your comfort zone.
+Well, yes. Go to pubbrawl.tech right now and plan your next Tuesday night. You start by telling us how many stops your sober brain intends to take before utterly failing counting to ten. Then you select the safety level you feel most comfortable with and also which kind of places you like. We surely don't want you to leave your comfort zone.
 
 Last but not least, enter the start and end tube stations of your trip before hitting sceptically the Let's Go button. If you don't like the suggested route, just press Let's Go again and we will promptly supply you with a brand new route. 
 
