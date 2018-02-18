@@ -1,4 +1,4 @@
-# Pub BRawwwwwwl! ![Pub BRawl](/pubcrawlR/logo_reallythesmallest.png "Pub BRawl")
+# Pub BRawwwwwwl! ![Pub BRawl](/pubcrawlR/logo_smallest.png "Pub BRawl")
 * Pub BRawl is a probabilistic pub crawl route finder for London, built in R Shiny making use of Google Maps API 
 * We help you to have a safe night by incorporating crime data into the route choice & planning your trip from tube station to tube station
 * You can also filter for high quality pubs based on Google reviews (or low quality depending on your mood)
