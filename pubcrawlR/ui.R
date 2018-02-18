@@ -67,45 +67,46 @@ ui <- fluidPage(
         br(),
         br(),
         
-        tags$div(
-          tags$p("How many stops?")  
+        fluidRow(
+          column(width = 4,  
+                 tags$div(
+            tags$p("How many stops?")  
+          ),
+          sliderInput("number_pints", "",
+                      min = 0, max = 10,
+                      value = 5)
+                 ),
+          
+          column(width = 4,
+                 tags$div(
+                   tags$p("Do you want to get into a fight?")  
+                 ),
+                 actionButton("unsafe", "Come at me mate"),
+                 actionButton("safe", "Nah, play it safe"),
+                 actionButton("carefree", "Whatever I'm easy")
+                 ),
+          
+          column(width= 4, 
+                 tags$div(
+                   tags$p("Palaces or gutters?")  
+                 ),
+                 sliderInput("google_review", "",
+                             min = 0, max = 5,
+                             value = 3.5, step = 0.1)
+                 )
+        
         ),
-        sliderInput("number_pints", "",
-                    min = 0, max = 10,
-                    value = 5),
         
-        br(),
-        br(),
-        
-        tags$div(
-          tags$p("Palaces or gutters?")  
-        ),
-        sliderInput("google_review", "",
-                    min = 0, max = 5,
-                    value = 3.5, step = 0.1),
-        
-        br(),
-        br(),
-        
-        tags$div(
-          tags$p("Do you want to get into a fight?")  
-        ),
-        actionButton("unsafe", "Come at me mate"),
-        actionButton("safe", "Nah, play it safe"),
-        actionButton("carefree", "Whatever I'm easy"),
   
         br(),
         br(),
         
-        google_mapOutput(outputId = "map", height = "600px", width="80%"),
-        
+        submitButton("Let's Go", icon("refresh")), 
+  
         br(),
         br(),
         
-        submitButton("Update View", icon("refresh")), 
-        
-        br(),
-        br()
+        google_mapOutput(outputId = "map", height = "600px", width="80%")
       )
   )
 )
