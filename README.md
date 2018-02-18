@@ -1,8 +1,8 @@
 # Pub BRawwwwwwl!
-⋅⋅* Pub BRawl is a probabilistic pub crawl route finder for London, built in R Shiny making use of Google Maps API 
-⋅⋅* We help you to have a safe night by incorporating crime data into the route choice & planning your trip from tube station to tube station
-⋅⋅* You can also filter for high quality pubs based on Google reviews (or low quality depending on your mood)
-⋅⋅* Finally, the app tells you where the nearest A&E is to your night out, just in case
+* Pub BRawl is a probabilistic pub crawl route finder for London, built in R Shiny making use of Google Maps API 
+* We help you to have a safe night by incorporating crime data into the route choice & planning your trip from tube station to tube station
+* You can also filter for high quality pubs based on Google reviews (or low quality depending on your mood)
+* Finally, the app tells you where the nearest A&E is to your night out, just in case
 
 ## First round is on us! :beers:
 
@@ -42,4 +42,7 @@ Yes.
 
 By hitting the "Let's Go" button, our magic 8-ball machine collects all the pubs between your endpoints and filters them down by your favoured Google Review Rating. Then we pull last years street-level crime rates around each potential pub to calculate our "Fun score". Depending on your crime preferences, we will sample pubs into our suggestions based on a probabilistic score. At last, we search for a heuristically shortest path between the stopovers so you don't need to walk for too long before the next great drink. This really is Pub BRawl!
 
+## Disclaimer!
+
+This is a tongue-in-cheek product and the creators accept no responsibility for your misadventures!
 
