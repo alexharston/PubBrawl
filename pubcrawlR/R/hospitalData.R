@@ -28,14 +28,14 @@ getHospRatings <- function(x.start,y.start,x.end,y.end,key){
                              #rankby = 'distance',
                              #place_type = c('bar', 'restaurant'),
                              key = key)
-  accidentandemergency <- data.frame(unique(pubs.list$results$name),pubs.list$results$geometry$location, pubs.list$results$rating)
+  accidentandemergency <- data.frame(pubs.list$results$name,pubs.list$results$geometry$location, pubs.list$results$rating)
   uc.list <- google_places(search_string = 'urgent care centre',
                            location = c(x.mid, y.mid),
                            radius = 10000,
                            #rankby = 'distance',
                            #place_type = c('bar', 'restaurant'),
                            key = key)
-  urgent_Care <- data.frame(unique(uc.list$results$name),uc.list$results$geometry$location, uc.list$results$rating)
+  urgent_Care <- data.frame(uc.list$results$name,uc.list$results$geometry$location, uc.list$results$rating)
   names(urgent_Care) <- c("hospital","lat","long","google_review")
   names(accidentandemergency) <- c("hospital","lat","long","google_review")
   loc_ratings <- rbind(urgent_Care,accidentandemergency)
