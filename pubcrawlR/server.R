@@ -11,7 +11,7 @@ server <- function(input, output, session) {
   y.end <- stations@coords[grep(stations$Name, pattern = 'Holborn'), 1]
   x.end <- stations@coords[grep(stations$Name, pattern = 'Holborn'), 2]
 
-  df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
+  #df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
   pubs <- findPubs(x.start, y.start, x.end, y.end, key)
   
   # Define API key
@@ -62,7 +62,7 @@ server <- function(input, output, session) {
   
   # Get list of pubs
   # df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
-  pubs <- findPubs(x.start, y.start, x.end, y.end, key)
+  #pubs <- findPubs(x.start, y.start, x.end, y.end, key)
   
   
   # Get list of a) selected pubs and b) polyline for GoogleMaps
@@ -80,26 +80,35 @@ server <- function(input, output, session) {
   output$map <- renderGoogle_map({
     google_map(key = key, data = google.polyline$selectedpubs, search_box = F) %>%
       add_markers(lat = 'lat', lon = 'lng', info_window = 'pub_name') %>%
-   add_polylines(data = df, polyline = google.polyline$polyline$points, stroke_weight = 9)    #  add_drawing(drawing_modes = c('rectangle')) 
+      add_polylines(data = df, polyline = google.polyline$polyline$points, stroke_weight = 9)    #  add_drawing(drawing_modes = c('rectangle')) 
   })
  
-  #  
-  # observeEvent(input$go, {
-  #   y.start <- stations@coords[stations$Name == input$start, 1]
-  #   x.start <- stations@coords[stations$Name == input$start, 2]
-  #   pubs <- findPubs(x.start, y.start, x.end, y.end, key)
-  #   df.updated <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
-  #   print(pubs)
-  #   google_map_update(map_id = 'map') 
-  # })
-  
-  # observeEvent(input$go, {
-  #   y.end <- stations@coords[stations$Name == input$end, 1]
-  #   x.end <- stations@coords[stations$Name == input$end, 2]
-  #   pubs <- findPubs(x.start, y.start, x.end, y.end, key)
-  #   df.updated <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
-  #   google_map_update(map_id = 'map') 
-  # })
+    
+  observeEvent(input$go, {
+    # Get station coordinates
+    y.start <- stations@coords[stations$Name == input$start, 1]
+    x.start <- stations@coords[stations$Name == input$start, 2]
+    y.end <- stations@coords[stations$Name == input$end, 1]
+    x.end <- stations@coords[stations$Name == input$end, 2]
+    # Combine station coordinates
+    start.coord <- c(x.start, y.start)
+    end.coord <- c(x.end, y.end)
+    # Find pubs for coordinates
+    pubs <- findPubs(x.start, y.start, x.end, y.end, key)
+    # Get list of a) selected pubs and b) polyline for GoogleMaps
+    google.polyline <- SelectPubsAndGetRoute(pubs = pubs,
+        start.coord = start.coord,
+        end.coord = end.coord,
+        number_pints = input$number_pints,
+        safe = "safe",
+        api_key = key)
+    print(pubs)
+    google_map_update(map_id = 'map') %>%
+      clear_markers() %>%
+      add_markers(data = google.polyline$selectedpubs, lat = 'lat', lon = 'lng', info_window = 'pub_name') %>%
+      clear_polylines() %>%
+      add_polylines(data = df, polyline = google.polyline$polyline$points, stroke_weight = 9)    
+  })
   
   ## Test case
   ## Start location

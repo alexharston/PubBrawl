@@ -109,7 +109,8 @@ ui <- fluidPage(
    br(),
    br(),
         
-   submitButton("Let's Go", icon("refresh")), 
+   #submitButton("Let's Go", icon("refresh")), 
+   actionButton('go', "Let's GO!"), 
   
         br(),
         br(),
