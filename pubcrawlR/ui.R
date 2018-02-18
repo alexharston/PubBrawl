@@ -17,8 +17,8 @@ source('./R/pubFinder.R')
 source('./server.R')
 
 # Define API key
-key <- 'AIzaSyDK0rcvTeq4zig62iTFWSved_FfuKjX0xY'
-#key <- 'AIzaSyCVHKD81q7hEu_pAIOtJ50uzaE5GbAfNoA'
+#key <- 'AIzaSyDK0rcvTeq4zig62iTFWSved_FfuKjX0xY'
+key <- 'AIzaSyCVHKD81q7hEu_pAIOtJ50uzaE5GbAfNoA'
 set_key(key)
 
 # Get stations
@@ -99,24 +99,22 @@ ui <- fluidPage(
         
         ),
         
-  
- 
   # Text input box 
   selectizeInput('start', 'Pub crawl start location', stations$Name, selected = 'Camden Town Station'),
   selectizeInput('end', 'Pub crawl end location', stations$Name, selected = 'Holborn Station'),
 
-
-   br(),
-   br(),
+  br(),
+  br(),
         
-   submitButton("Let's Go", icon("refresh")), 
+  #submitButton("Let's Go", icon("refresh")), 
+  actionButton('go', "Let's GO!"), 
   
-        br(),
-        br(),
+  br(),
+  br(),
         
-        google_mapOutput(outputId = "map", height = "600px", width="80%")
-      )
+  google_mapOutput(outputId = "map", height = "600px", width="80%")
   )
+ )
 )
   
 
