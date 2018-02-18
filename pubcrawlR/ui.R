@@ -1,31 +1,28 @@
 library(shiny)
-library(googleway)
-library(geosphere)
+library(shinysky)
+
 library(dplyr)
 library(tidyr)
+library(readr)
+
+library(googleway)
+library(geosphere)
 library(getopt)
 library(jsonlite)
 library(httr)
 library(lubridate)
 
-# ui <- fluidPage(
-#   titlePanel('HackCity 2018 project - PubCrawlR'),
-#   google_mapOutput(outputId = "map", height = "800px")
-#   
-# )
+source('./R/pubFinder.R')
+source('./server.R')
 
-# ui <- fluidPage(theme = "bootstrap.css",
-#     titlePanel('HackCity 2018 project - PubCrawlR'),
-#     google_mapOutput(outputId = "map", height = "800px"),
-#     headerPanel("PubCrawlR"),
-# 
-#     mainPanel(plotOutput())
-# )
+# Define API key
+key <- 'AIzaSyCQRLfT4Svbb0PoG9TKH_aPJiRO6FGSh2c'
+set_key(key)
 
 ui <- fluidPage(
   
   fluidRow(
-    column(8, align="center",
+    column(12, align="center",
       
   
   
@@ -44,9 +41,9 @@ ui <- fluidPage(
 
       p {
       font-family: Roboto, sans-serif;
-      font-size:48pt;
-      font-weight:600;
-      color: red;
+      font-size:32pt;
+      font-weight:300;
+      color: white;
       text-align: center;
       }
 
@@ -59,7 +56,7 @@ ui <- fluidPage(
 
   # titlePanel('pubcRawl'),
   
-  headerPanel("pubcRawl"),
+  headerPanel("PubBrawl"),
   
   tags$div(
     tags$p("Do you want to get into a fight?")  
@@ -75,6 +72,11 @@ ui <- fluidPage(
   
   actionButton("button", "Yes"),
   actionButton("button", "No"),
+  
+  # Input: Simple integer interval ----
+  sliderInput("integer", "How many pubs?",
+              min = 2, max = 10,
+              value = 1),
   
   google_mapOutput(outputId = "map", height = "600px", width="80%")
 )
