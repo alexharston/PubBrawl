@@ -8,7 +8,7 @@ suppressMessages(library(jsonlite))
 #==============================================================================#
 #                             FUNCTIONS
 #==============================================================================#
-findPubs <- function(x.start, y.start, x.end, y.end, api.key, quality_threshold) {
+findPubs <- function(x.start, y.start, x.end, y.end, api.key, quality_threshold, number_pints) {
   # Find mindpoint between both locations
   x.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[1]
   y.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[2]
@@ -31,7 +31,7 @@ findPubs <- function(x.start, y.start, x.end, y.end, api.key, quality_threshold)
 
   quality.pubs.dt <- pubs.dt[rating > quality_threshold]
 
-  if(nrow(quality.pubs.dt) == 0) quality.pubs.dt <- pubs.dt
+  if(nrow(quality.pubs.dt) < (1.5 * number_pints)) quality.pubs.dt <- pubs.dt
 
 }
 
