@@ -6,6 +6,10 @@ findPubs <- function(x.start, y.start, x.end, y.end, key, quality_threshold = 0,
   x.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[1]
   y.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[2]
 
+  # ==========
+  # First get pubs around midpoint
+  # ==========
+
   # Query goolge API to find all pubs within a radius around
   pubs.list <- google_places(search_string = 'pub',
                              location = c(x.mid, y.mid),
@@ -22,9 +26,63 @@ findPubs <- function(x.start, y.start, x.end, y.end, key, quality_threshold = 0,
 
   pubs.dt <- as.data.table(pubs.df)
 
-  quality.pubs.dt <- pubs.dt[rating > quality_threshold]
+  # ==========
+  # Then get pubs at midpoint of start and midpoint
+  # ==========
+  x.mid.start <- midPoint(c(x.start, y.start), c(x.mid, y.mid))[1]
+  y.mid.start <- midPoint(c(x.start, y.start), c(x.mid, y.mid))[2]
 
-  if(nrow(quality.pubs.dt) < (1.5 * number_pints)) quality.pubs.dt <- pubs.dt
+  # Query goolge API to find all pubs within a radius around
+  pubs.start.list <- google_places(search_string = 'pub',
+                             location = c(x.mid.start, y.mid.start),
+                             radius = 500,
+                             #rankby = 'distance',
+                             #place_type = c('bar', 'restaurant'),
+                             key = key)
+
+  # Tidy API search results
+  pubs.start.df <- data_frame(pub_name = pubs.start.list$results$name) %>%
+    bind_cols(., pubs.start.list$results$geometry$location) %>%
+    mutate(rating = pubs.start.list$results$rating,
+           price_level = pubs.start.list$results$price_level)
+
+  pubs.start.dt <- as.data.table(pubs.start.df)
+
+  # ==========
+  # Then get pubs at midpoint of end and midpoint
+  # ==========
+  x.mid.end <- midPoint(c(x.end, y.end), c(x.mid, y.mid))[1]
+  y.mid.end <- midPoint(c(x.end, y.end), c(x.mid, y.mid))[2]
+
+  # Query goolge API to find all pubs within a radius around
+  pubs.end.list <- google_places(search_string = 'pub',
+                             location = c(x.mid.end, y.mid.end),
+                             radius = 500,
+                             #rankby = 'distance',
+                             #place_type = c('bar', 'restaurant'),
+                             key = key)
+
+  # Tidy API search results
+  pubs.end.df <- data_frame(pub_name = pubs.end.list$results$name) %>%
+    bind_cols(., pubs.end.list$results$geometry$location) %>%
+    mutate(rating = pubs.end.list$results$rating,
+           price_level = pubs.end.list$results$price_level)
+
+  pubs.end.dt <- as.data.table(pubs.end.df)
+
+  # ==========
+  # Merge all three
+  # ==========
+
+  pubs.all.dt <- rbind(pubs.dt, pubs.start.dt, pubs.end.dt)
+
+  # ==========
+  # Filter based on quality
+  # ==========
+
+  quality.pubs.dt <- pubs.all.dt[rating > quality_threshold]
+
+  if(nrow(quality.pubs.dt) < (1.5 * number_pints)) quality.pubs.dt <- pubs.all.dt
   return(quality.pubs.dt)
 }
 
