@@ -1,7 +1,15 @@
 server <- function(input, output, session){
  
-  #somevariable <- NobbysFunction(){}
-
+  source("R/getCrime.R")
+  source("R/getRoute.R")
+  source("R/wrapper.R")
+  
+  google.polyline <- SelectPubsAndGetRoute(pubs = pubs,
+      start.coord = start.coord,
+      end.coord = end.coord,
+      number_pints = 5,
+      safe = "safe")
+  
   # Define API key
   key <- 'AIzaSyAa55bTPXC1akgwWNm61KT43AsmwI9NZuY'
 
@@ -21,7 +29,7 @@ server <- function(input, output, session){
   output$map <- renderGoogle_map({
     google_map(data = pubs, search_box = F) %>%
       add_markers(lat = 'lat', lon = 'lng', info_window = 'pub_name') %>%
-      add_polylines(data = df, polyline = 'polyline', stroke_weight = 9) 
+      add_polylines(data = df, polyline = google.polyline$polyline, stroke_weight = 9) 
       #add_drawing(drawing_modes = c('circle')) 
   })
   
