@@ -20,7 +20,7 @@ integrateWithWait <- function(URL,ae_trust,loc_ratings){
 getHospRatings <- function(x.start,y.start,x.end,y.end,key){
   x.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[1]
   y.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[2]
-  
+
   # Query google API to find all pubs within a radius around
   pubs.list <- google_places(search_string = 'accident and emergency',
                              location = c(x.mid, y.mid),
@@ -60,20 +60,20 @@ getFinalString <- function(hos_coords,final_frame){
   final_frame$lat <- as.character(final_frame$lat)
   final_frame$long <- as.character(final_frame$long)
   final <- final_frame %>% filter(lat==as.character(hos_coords[[1]]) & long==as.character(hos_coords[[2]]))
-  return(paste0("The nearest A&E to your Pub Brawl (TM) is <b>",final$centre,"</b>. It has an average google review of <b>",final$google_review,"</b> and <b>",round(final$percent_under_4hrs,2),"%</b> of people get seen within 4 hours, so you probably won't die."))
+  return(paste0("The nearest A&E to your Pub Brawl (TM) is ",final$centre,". It has an average google review of ",final$google_review," and ",round(final$percent_under_4hrs,2),"% of people get seen within 4 hours, so you probably won't die."))
 }
 
 ##### MAIN ##########
-#getNearestAandE <- function(x.start,
-#                            y.start,
-#                            x.end, 
-#                            y.end,
-#                            key,
-#                            pubs){
-#  loc_ratings <- getHospRatings(x.start,y.start,x.end,y.end,key)
-#  ae_trust <- fread("london_AandE_plusTrust.csv",header=FALSE)
-#  URL_jan18 <- "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2018/02/January-csv-att-e652S.csv"
-#  final_frame <- integrateWithWait(URL_jan18,ae_trust,loc_ratings)
-#  hos_coords <- getMinHos(pubs,final_frame,key)
-#  return(getFinalString(hos_coords,final_frame))
-#}
+getNearestAandE <- function(x.start,
+                           y.start,
+                           x.end,
+                           y.end,
+                           key,
+                           pubs){
+ loc_ratings <- getHospRatings(x.start,y.start,x.end,y.end,key)
+ ae_trust <- fread("london_AandE_plusTrust.csv",header=FALSE)
+ URL_jan18 <- "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2018/02/January-csv-att-e652S.csv"
+ final_frame <- integrateWithWait(URL_jan18,ae_trust,loc_ratings)
+ hos_coords <- getMinHos(pubs,final_frame,key)
+ return(getFinalString(hos_coords,final_frame))
+}

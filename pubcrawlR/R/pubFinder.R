@@ -75,6 +75,7 @@ findPubs <- function(x.start, y.start, x.end, y.end, key, quality_threshold = 0,
   # ==========
 
   pubs.all.dt <- rbind(pubs.dt, pubs.start.dt, pubs.end.dt)
+  pubs.all.dt <- unique(pubs.all.dt)
 
   # ==========
   # Filter based on quality
