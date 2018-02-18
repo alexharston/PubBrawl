@@ -8,7 +8,7 @@ suppressMessages(library(jsonlite))
 #==============================================================================#
 #                             FUNCTIONS
 #==============================================================================#
-findPubs <- function(x.start, y.start, x.end, y.end, api.key, number_pints, quality = c("good", "bad")) {
+findPubs <- function(x.start, y.start, x.end, y.end, api.key, quality_threshold) {
   # Find mindpoint between both locations
   x.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[1]
   y.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[2]
@@ -29,17 +29,9 @@ findPubs <- function(x.start, y.start, x.end, y.end, api.key, number_pints, qual
 
   pubs.dt <- as.data.table(pubs.df)
 
-  if(quality == "good") {
+  quality.pubs.dt <- pubs.dt[rating > quality_threshold]
 
-      setorder(pubs.dt, -rating)
-      return(pubs.dt[1:number_pints]
-
-  } else if(quality == "good") {
-
-      setorder(pubs.dt, rating)
-      return(pubs.dt[1:number_pints]
-
-  }
+  if(nrow(quality.pubs.dt) == 0) quality.pubs.dt <- pubs.dt
 
 }
 
