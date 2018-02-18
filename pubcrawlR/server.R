@@ -1,5 +1,5 @@
 server <- function(input, output, session) {
- 
+
   library(data.table)
   source("R/getCrime.R")
   source("R/getRoute.R")
@@ -13,70 +13,77 @@ server <- function(input, output, session) {
 
   #df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
   pubs <- findPubs(x.start, y.start, x.end, y.end, key)
-  
+
   # Define API key
   # key <- 'AIzaSyBBm8BH5k410AQ9lr6Rm1HrYyyI8X-gULI'
-  
+
   # Test case
   # Start location
   # x.start <- 51.534186
   # y.start <- -0.138886
-  
+
   # # End location
   # x.end <- 51.517647
   # y.end <- -0.119974
-  
+
   start.coord <- c(x.start, y.start)
   end.coord <- c(x.end, y.end)
 
   sliderValues <- reactive({
-    
+
     data.frame(
       Name = c( "NumberPints",
                 "GoogleReview" ),
       Value = as.character( c( input$number_pints,
                                input$google_review ) ),
       stringsAsFactors = FALSE)
-    
+
   })
 
-  
+
   # Show the values in an HTML table ----
   output$values <- renderTable({
     sliderValues()
   })
-  
+
   safety <- reactiveValues(data = NULL)
-  
+
   observeEvent(input$unsafe, {
     safety  <- "unsafe"
   })
-  
+
   observeEvent(input$safe, {
     safety  <- "safe"
-  })  
+  })
 
   observeEvent(input$carefree, {
     safety  <- "carefree"
-  }) 
-  
+  })
+
   # Get list of pubs
   # df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
+<<<<<<< HEAD
   #pubs <- findPubs(x.start, y.start, x.end, y.end, key)
   
   
+=======
+  pubs <- findPubs(x.start, y.start, x.end, y.end, key,
+      quality_threshold = sliderValues$Value[sliderValues$Name == "GoogleReview"],
+      number_pints = sliderValues$Value[sliderValues$Name == "NumberPints"])
+
+>>>>>>> 629ec5836fe08c7bffa6640acb7720b27aba225f
   # Get list of a) selected pubs and b) polyline for GoogleMaps
   google.polyline <- SelectPubsAndGetRoute(pubs = pubs,
       start.coord = start.coord,
       end.coord = end.coord,
-      number_pints = 5,
-      safe = "safe",
+      number_pints = sliderValues$Value[sliderValues$Name == "NumberPints"],
+      safe = safety,
       api_key = key)
 
   # print(google.polyline$polyline)
 
   # library(sf)
-  
+
   output$map <- renderGoogle_map({
     google_map(key = key, data = google.polyline$selectedpubs, search_box = F) %>%
       add_markers(lat = 'lat', lon = 'lng', info_window = 'pub_name') %>%
@@ -118,5 +125,5 @@ server <- function(input, output, session) {
   ## End location
   #x.end <- 51.517647
   #y.end <- -0.119974
-  
-} 
+
+}
