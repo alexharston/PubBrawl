@@ -71,7 +71,7 @@ getNearestAandE <- function(x.start,
                            key,
                            pubs){
  loc_ratings <- getHospRatings(x.start,y.start,x.end,y.end,key)
- ae_trust <- fread("london_AandE_plusTrust.csv",header=FALSE)
+ ae_trust <- fread("./data/london_AandE_plusTrust.csv",header=FALSE)
  URL_jan18 <- "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2018/02/January-csv-att-e652S.csv"
  final_frame <- integrateWithWait(URL_jan18,ae_trust,loc_ratings)
  hos_coords <- getMinHos(pubs,final_frame,key)

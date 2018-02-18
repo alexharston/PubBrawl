@@ -22,7 +22,7 @@ source('./R/hospitalData.R')
 source('./server.R')
 
 # Define API key
-key <- 'AIzaSyCHPeKBOeV7QrPEPppnkimSpyRFCUsVNSc'
+key <- 'AIzaSyD_maC35oOQZLKU_pqh-HTZiMESqUSwkJs'
 set_key(key)
 
 # Get stations
