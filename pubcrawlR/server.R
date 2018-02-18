@@ -14,6 +14,9 @@ server <- function(input, output, session){
   x.end <- 51.517647
   y.end <- -0.119974
   
+  start.coord <- c(x.start, x.end)
+  end.coord <- c(y.end, y.end)
+  
   df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
   pubs <- findPubs(x.start, y.start, x.end, y.end, key)
   
