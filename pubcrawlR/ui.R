@@ -17,8 +17,8 @@ source('./R/pubFinder.R')
 source('./server.R')
 
 # Define API key
-key <- 'AIzaSyDK0rcvTeq4zig62iTFWSved_FfuKjX0xY'
-#key <- 'AIzaSyCVHKD81q7hEu_pAIOtJ50uzaE5GbAfNoA'
+#key <- 'AIzaSyDK0rcvTeq4zig62iTFWSved_FfuKjX0xY'
+key <- 'AIzaSyCVHKD81q7hEu_pAIOtJ50uzaE5GbAfNoA'
 set_key(key)
 
 # Get stations

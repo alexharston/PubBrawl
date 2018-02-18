@@ -62,21 +62,18 @@ server <- function(input, output, session) {
 
   # Get list of pubs
   # df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
-
   #pubs <- findPubs(x.start, y.start, x.end, y.end, key)
   
-  
-
-  pubs <- findPubs(x.start, y.start, x.end, y.end, key,
-      quality_threshold = sliderValues$Value[sliderValues$Name == "GoogleReview"],
-      number_pints = sliderValues$Value[sliderValues$Name == "NumberPints"])
+  pubs <- findPubs(x.start, y.start, x.end, y.end, key)
+     # quality_threshold = sliderValues$Value[sliderValues$Name == "GoogleReview"],
+     # number_pints = sliderValues$Value[sliderValues$Name == "NumberPints"])
 
   # Get list of a) selected pubs and b) polyline for GoogleMaps
   google.polyline <- SelectPubsAndGetRoute(pubs = pubs,
       start.coord = start.coord,
       end.coord = end.coord,
-      number_pints = sliderValues$Value[sliderValues$Name == "NumberPints"],
-      safe = safety,
+      number_pints = 5, #sliderValues$Value[sliderValues$Name == "NumberPints"],
+      safe = 'safe',
       api_key = key)
 
   # print(google.polyline$polyline)
