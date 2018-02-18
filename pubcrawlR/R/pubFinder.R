@@ -1,7 +1,7 @@
 #==============================================================================#
 #                             FUNCTIONS
 #==============================================================================#
-findPubs <- function(x.start, y.start, x.end, y.end, key, quality_threshold, number_pints) {
+findPubs <- function(x.start, y.start, x.end, y.end, key, quality_threshold = 0, number_pints = 5) {
   # Find midpoint between both locations
   x.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[1]
   y.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[2]
