@@ -20,28 +20,66 @@ key <- 'AIzaSyCQRLfT4Svbb0PoG9TKH_aPJiRO6FGSh2c'
 set_key(key)
 
 ui <- fluidPage(
-  # Page title
-  titlePanel('Hackcity 2018 project - PubCrawlR'),
   
-  # Google maps 
-  mainPanel(google_mapOutput(outputId = 'map', height = '800px'))
+  fluidRow(
+    column(12, align="center",
+      
   
-  # Sidebars
-  #sidebarLayout(
-  #  # Text input 
-  #  #sidebarPanel(selectInput('start', 'Pub crawl start', choices = '', multiple = T)),
-  #  #sidebarPanel(selectizeInput('start', 'Pub crawl start', choices = '')),
-  #  #sidebarPanel(select2Input('start', 'Pub crawl start', choices = 'Select a start point', type = 'input')), 
-  #  #sidebarPanel(textInput('start', 'Pub crawl start', '')),
-  #  #sidebarPanel(textInput.typeahead(id = 'start',
-  #  #                                 placeholder = '', 
-  #  #                                 local = data_frame(description = 'London'),
-  #  #                                 template = HTML("<p class='des'>{{description}}</p>"),
-  #  #                                 tokens = 1, valueKey = 'description')),
-  #  #
-  #  # Google maps 
-  #  mainPanel(google_mapOutput(outputId = 'map', height = '800px'))
-  #)
-)
+  
+  tags$head(
+    tags$style(HTML("
+      
+      @import url('https://fonts.googleapis.com/css?family=Lobster');
+  
+      h1 {
+        font-family: 'Lobster', Arial, cursive;
+        font-weight: 300;
+        line-height: 1.1;
+        color: #3498db;
+        text-align: center;
+      }
 
+      p {
+      font-family: Roboto, sans-serif;
+      font-size:32pt;
+      font-weight:300;
+      color: white;
+      text-align: center;
+      }
+
+      body {
+        background-color: #f1c40f;
+      }
+  
+    "))
+  ),
+
+  # titlePanel('pubcRawl'),
+  
+  headerPanel("PubBrawl"),
+  
+  tags$div(
+    tags$p("Do you want to get into a fight?")  
+  ),
+  
+  actionButton("button", "Come at me mate"),
+  actionButton("button", "No"),
+  actionButton("button", "I literally don't care"),
+  
+  tags$div(
+    tags$p("Do you want to have a quality time?")  
+  ),
+  
+  actionButton("button", "Yes"),
+  actionButton("button", "No"),
+  
+  # Input: Simple integer interval ----
+  sliderInput("integer", "How many pubs?",
+              min = 2, max = 10,
+              value = 1),
+  
+  google_mapOutput(outputId = "map", height = "600px", width="80%")
+)
+)
+)
 shinyApp(ui, server)
