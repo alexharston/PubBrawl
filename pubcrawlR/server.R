@@ -7,7 +7,7 @@ server <- function(input, output, session) {
   source("R/pubFinder.R")
   
   # Define API key
-  key <- 'AIzaSyDrdDGXsYogQLn3Wg9ANqZVy4I610e6Ork'
+  key <- 'AIzaSyCLy4GVOzDlcVW5D7HBLjsbjDyXtES0u6g'
   
   # Test case
   # Start location
@@ -21,9 +21,12 @@ server <- function(input, output, session) {
   start.coord <- c(x.start, y.start)
   end.coord <- c(x.end, y.end)
   
-  df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
+  # Get list of pubs
+  # df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
   pubs <- findPubs(x.start, y.start, x.end, y.end, key)
   
+  
+  # Get list of a) selected pubs and b) polyline for GoogleMaps
   google.polyline <- SelectPubsAndGetRoute(pubs = pubs,
       start.coord = start.coord,
       end.coord = end.coord,
@@ -31,13 +34,19 @@ server <- function(input, output, session) {
       safe = "safe",
       api_key = key)
 
+  # print(google.polyline$polyline)
 
+  # library(sf)
   
   output$map <- renderGoogle_map({
-    google_map(data = pubs, search_box = F) %>%
-      add_markers(lat = 'lat', lon = 'lng', info_window = 'pub_name') %>%
-      add_polylines(data = df, polyline = google.polyline$polyline, stroke_weight = 9) 
+    google_map(key = key, data = pubs, search_box = F) %>%
+      add_markers(lat = 'lat', lon = 'lng', info_window = 'pub_name') 
+    
+    # 
+    # %>%
+    #   add_polylines(data = df, polyline = "wgpyHfdZa@Gi@SKQLk@ZSfBuB~CmDhCyCrMsN^a@_@`@_AiDGKCAC@y@{Ca@wAIMCAD_@CCEGoAkEzA}AZ[mAmEYeAEWc@wDSHKe@q@oEG]DGBgD@e@AYMSMg@h@UvDe@~@GNBFJPj@LOF@D?HEFP@@FEHIFXFXGYGYROLMBEFFDDDEDLLKtCqCfAiADM?o@M{LIiDCk@v@m@d@a@DY@OQaBP`BTHv@m@zBaAtAw@b@[dBsAROBBv@o@b@a@dDmDx@eADNLr@~AdLl@jEXON@JBn@[hCoArCyAbAi@F?l@Y~Aw@XOTvAv@pER~@Zt@R^HDJBH@VEF?B@NOZS`Ao@ZQf@SnA_@TILBJBTRDvC", stroke_weight = 9) 
       #add_drawing(drawing_modes = c('circle')) 
+    
   })
   
   observeEvent(input$map_map_click, {
