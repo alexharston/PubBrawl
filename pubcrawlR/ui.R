@@ -11,6 +11,7 @@ library(getopt)
 library(jsonlite)
 library(httr)
 library(lubridate)
+library(RCurl)
 library(shinythemes)
 
 source("./R/getCrime.R")
@@ -20,7 +21,7 @@ source('./R/pubFinder.R')
 source('./server.R')
 
 # Define API key
-key <- 'AIzaSyDPYgITu5O8Tkr3Nqj8ar-PZxWvugF3aO4'
+key <- 'AIzaSyBk9UJjKA2prqRBE4_p7zIp7cr9Lya0OKk'
 set_key(key)
 
 # Get stations
@@ -36,8 +37,6 @@ ui <- fluidPage(
   
   fluidRow(
     column(12, align="center",
-      
-  
   
   tags$head(
     tags$style(HTML("
@@ -79,7 +78,7 @@ ui <- fluidPage(
             tags$p("How many stops?")  
           ),
           sliderInput("number_pints", "",
-                      min = 0, max = 12,
+                      min = 2, max = 11,
                       value = 5)
                  ),
           
@@ -112,10 +111,17 @@ ui <- fluidPage(
   # Define submit buttom      
   actionButton('go', "Let's GO!"), 
   
+  # Google map    
   br(),
   br(),
-        
-  google_mapOutput(outputId = "map", height = "600px", width="80%")
+  google_mapOutput(outputId = "map", height = "600px", width="80%"),
+  
+  # Hospital string
+  br(),
+  br(),
+  textOutput("hospital_str"),
+  br(),
+  br()
   )
  )
 )

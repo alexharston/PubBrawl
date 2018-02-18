@@ -18,6 +18,15 @@ server <- function(input, output, session) {
       number_pints = 5, 
       safe = 'safe',
       api_key = key)
+  
+  # Get nearest hosptial
+  output$hospital_str <- renderText({
+    getNearestAandE(x.start, y.start, x.end, y.end,
+                    key, google.polyline$selectedpubs)
+  })
+  
+  # Insert nearest hospital as UI 
+  #insertUI(selector = 'map', where = 'afterEnd', ui = hospital.string)
 
   # PLOT a map with pubs as points and shortest path as blue line
   output$map <- renderGoogle_map({
@@ -56,5 +65,4 @@ server <- function(input, output, session) {
       clear_polylines() %>%
       add_polylines(data = df, polyline = google.polyline$polyline$points, stroke_weight = 9)    
   })
-  
 }

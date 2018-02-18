@@ -1,23 +1,6 @@
-#install.packages("googleway")
-library(googleway)
-#install.packages("geosphere")
-library(geosphere)
-library(dplyr)
-#install.packages("getopt")
-library(getopt)
-#install.packages("jsonlite")
-library(jsonlite)
-library(data.table)
-library(RCurl)
-
-
-x.start <- 51.55313
-y.start <- -0.111235
-x.end <- 51.563376 
-y.end <- -0.045317
-key <- "AIzaSyAdRpFqJ31VMifeFUTrLYcw9VNoaIfwyW4"
-pubs <- fread("pubs.tsv")
-
+#==============================================================================#
+#                             FUNCTIONS
+#==============================================================================#
 integrateWithWait <- function(URL,ae_trust,loc_ratings){
   x <- getURL(URL)
   out <- read.csv(textConnection(x),skip=6,header=FALSE, stringsAsFactors = FALSE)
@@ -81,24 +64,16 @@ getFinalString <- function(hos_coords,final_frame){
 }
 
 ##### MAIN ##########
-
-getNearestAandE <- function(x.start,
-                            y.start,
-                            x.end, 
-                            y.end,
-                            key,
-                            pubs){
-  loc_ratings <- getHospRatings(x.start,y.start,x.end,y.end,key)
-  ae_trust <- fread("london_AandE_plusTrust.csv",header=FALSE)
-  URL_jan18 <- "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2018/02/January-csv-att-e652S.csv"
-  final_frame <- integrateWithWait(URL_jan18,ae_trust,loc_ratings)
-  hos_coords <- getMinHos(pubs,final_frame,key)
-  return(getFinalString(hos_coords,final_frame))
-}
-
-getNearestAandE(x.start,
-                y.start,
-                x.end, 
-                y.end,
-                key,
-                pubs)
+#getNearestAandE <- function(x.start,
+#                            y.start,
+#                            x.end, 
+#                            y.end,
+#                            key,
+#                            pubs){
+#  loc_ratings <- getHospRatings(x.start,y.start,x.end,y.end,key)
+#  ae_trust <- fread("london_AandE_plusTrust.csv",header=FALSE)
+#  URL_jan18 <- "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2018/02/January-csv-att-e652S.csv"
+#  final_frame <- integrateWithWait(URL_jan18,ae_trust,loc_ratings)
+#  hos_coords <- getMinHos(pubs,final_frame,key)
+#  return(getFinalString(hos_coords,final_frame))
+#}
