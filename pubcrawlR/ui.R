@@ -1,10 +1,11 @@
 library(shiny)
-library(shinysky)
+# library(shinysky)
 
 library(dplyr)
 library(tidyr)
-library(readr)
+# library(readr)
 
+library(data.table)
 library(googleway)
 library(geosphere)
 library(getopt)
@@ -16,7 +17,7 @@ source('./R/pubFinder.R')
 source('./server.R')
 
 # Define API key
-key <- 'AIzaSyCQRLfT4Svbb0PoG9TKH_aPJiRO6FGSh2c'
+key <- 'AIzaSyAa55bTPXC1akgwWNm61KT43AsmwI9NZuY'
 set_key(key)
 
 ui <- fluidPage(

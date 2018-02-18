@@ -1,18 +1,9 @@
 server <- function(input, output, session){
  
+  library(data.table)
   source("R/getCrime.R")
   source("R/getRoute.R")
   source("R/wrapper.R")
-  
-  google.polyline <- SelectPubsAndGetRoute(pubs = pubs,
-      start.coord = start.coord,
-      end.coord = end.coord,
-      number_pints = 5,
-      safe = "safe")
-  
-  # Define API key
-  key <- 'AIzaSyAa55bTPXC1akgwWNm61KT43AsmwI9NZuY'
-
   
   # Test case
   # Start location
@@ -24,7 +15,17 @@ server <- function(input, output, session){
   y.end <- -0.119974
   
   df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
-  #pubs <- findPubs(x.start, y.start, x.end, y.end, key)
+  pubs <- findPubs(x.start, y.start, x.end, y.end, key)
+  
+  google.polyline <- SelectPubsAndGetRoute(pubs = pubs,
+      start.coord = start.coord,
+      end.coord = end.coord,
+      number_pints = 5,
+      safe = "safe")
+  
+  # Define API key
+  key <- 'AIzaSyCidFr8iYBBvsMPbal07w_PUuN6Xa0uEOA'
+
   
   output$map <- renderGoogle_map({
     google_map(data = pubs, search_box = F) %>%
