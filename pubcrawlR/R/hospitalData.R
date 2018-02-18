@@ -24,14 +24,14 @@ getHospRatings <- function(x.start,y.start,x.end,y.end,key){
   # Query google API to find all pubs within a radius around
   pubs.list <- google_places(search_string = 'accident and emergency',
                              location = c(x.mid, y.mid),
-                             radius = 10000,
+                             radius = 50000,
                              #rankby = 'distance',
                              #place_type = c('bar', 'restaurant'),
                              key = key)
   accidentandemergency <- data.frame(pubs.list$results$name,pubs.list$results$geometry$location, pubs.list$results$rating)
   uc.list <- google_places(search_string = 'urgent care centre',
                            location = c(x.mid, y.mid),
-                           radius = 10000,
+                           radius = 50000,
                            #rankby = 'distance',
                            #place_type = c('bar', 'restaurant'),
                            key = key)
