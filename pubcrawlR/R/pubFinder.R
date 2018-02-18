@@ -20,12 +20,12 @@ findPubs <- function(x.start, y.start, x.end, y.end, key, quality_threshold = 0,
     mutate(rating = pubs.list$results$rating,
            price_level = pubs.list$results$price_level)
 
-    pubs.dt <- as.data.table(pubs.df)
+  pubs.dt <- as.data.table(pubs.df)
 
-    quality.pubs.dt <- pubs.dt[rating > quality_threshold]
+  quality.pubs.dt <- pubs.dt[rating > quality_threshold]
 
-    if(nrow(quality.pubs.dt) < (1.5 * number_pints)) quality.pubs.dt <- pubs.dt
-
+  if(nrow(quality.pubs.dt) < (1.5 * number_pints)) quality.pubs.dt <- pubs.dt
+  return(quality.pubs.dt)
 }
 
 getStations <- function() {
