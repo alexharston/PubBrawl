@@ -8,7 +8,7 @@ suppressMessages(library(jsonlite))
 #==============================================================================#
 #                             FUNCTIONS
 #==============================================================================#
-findPubs <- function(x.start, y.start, x.end, y.end, api.key) {
+findPubs <- function(x.start, y.start, x.end, y.end, api.key, number_pints, quality = c("good", "bad")) {
   # Find mindpoint between both locations
   x.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[1]
   y.mid <- midPoint(c(x.start, y.start), c(x.end, y.end))[2]
@@ -28,9 +28,22 @@ findPubs <- function(x.start, y.start, x.end, y.end, api.key) {
            price_level = pubs.list$results$price_level)
 
   pubs.dt <- as.data.table(pubs.df)
-  return(pubs.dt)
-  # return(toJSON(pubs.df))
+
+  if(quality == "good") {
+
+      setorder(pubs.dt, -rating)
+      return(pubs.dt[1:number_pints]
+
+  } else if(quality == "good") {
+
+      setorder(pubs.dt, rating)
+      return(pubs.dt[1:number_pints]
+
+  }
+
 }
+
+
 
 #==============================================================================#
 #                           MAIN
