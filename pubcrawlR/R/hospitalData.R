@@ -1,4 +1,3 @@
-#
 #install.packages("googleway")
 library(googleway)
 #install.packages("geosphere")
@@ -103,4 +102,3 @@ getNearestAandE(x.start,
                 y.end,
                 key,
                 pubs)
-

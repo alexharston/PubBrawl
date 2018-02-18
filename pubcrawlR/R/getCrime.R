@@ -1,47 +1,7 @@
-# Script to select pubs from shortlist based on crime
-
-suppressMessages(library(dplyr))
-suppressMessages(library(tidyr))
-suppressMessages(library(httr))
-suppressMessages(library(jsonlite))
-suppressMessages(library(lubridate))
-suppressMessages(library(data.table))
-
+### Script to select pubs from shortlist based on crime
 #==============================================================================#
 #                                   FUNCTIONS
 #==============================================================================#
-
-# GetNumberOfCrimes <- function(latitude, longitude, year_month) {
-#
-#   # Create URL
-#   url <- "https://data.police.uk"
-#   # path <- 'all-crime?lat=52.629729&lng=-1.131592&date=2017-01'
-#   path <- paste0("api/crimes-street/all-crime?lat=", latitude, "&lng=", longitude, "&date=", year_month)
-#
-#   # Query API
-#   raw.result <- GET(url = url, path = path)
-#
-#   # Parse result into data.table
-#   parsed.dt <- as.data.table(fromJSON(content(raw.result,
-#                                               type = "text",
-#                                               encoding = "UTF-8"), flatten = TRUE))
-#
-#   # Select certain crimes
-#   crime.dt <- parsed.dt[category %in% c("anti-social-behaviour",
-#                                         "drugs",
-#                                         "violent-crime",
-#                                         "possession-of-weapons",
-#                                         "public-order",
-#                                         "theft-from-the-person")]
-#
-#   n_crimes <- nrow(crime.dt)
-#
-#   return(n_crimes)
-#
-# }
-
-# ============
-
 GetNumberOfCrimesPoly <- function(latitude, longitude, year_month = c(paste0(2016, "-", 10:12), paste0(2017, "-0", 1:9)), window = 0.002) {
 
   # https://data.police.uk/api/crimes-street/all-crime?poly=52.268,0.543:52.794,0.238:52.130,0.478&date=2017-01
@@ -129,9 +89,8 @@ SelectPubs <- function(pubs.crime.dt, number_pints, safe = c("safe", "unsafe", "
 }
 
 #==============================================================================#
-#                           MAIN
+#                                    MAIN                                      #
 #==============================================================================#
-
 # # Set dates
 # dates <- c(paste0(2016, "-", 10:12), paste0(2017, "-0", 1:9))
 #

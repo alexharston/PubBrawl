@@ -1,12 +1,7 @@
-# Script to select route between pubs from shortlist based on crime
-
-suppressMessages(library(googleway))
-suppressMessages(library(data.table))
-
+### Script to select route between pubs from shortlist based on crime
 #==============================================================================#
 #                                   FUNCTIONS
 #==============================================================================#
-
 PlotRoute <- function(selected.pubs.dt, start.coord, end.coord, api_key = api_key) {
 
   # Get start and finish coordinates
@@ -33,7 +28,6 @@ PlotRoute <- function(selected.pubs.dt, start.coord, end.coord, api_key = api_ke
 #==============================================================================#
 #                           MAIN
 #==============================================================================#
-
 # api.key <- "AIzaSyAa55bTPXC1akgwWNm61KT43AsmwI9NZuY"
 #
 # start.coord <- c(51.534186, -0.138886)

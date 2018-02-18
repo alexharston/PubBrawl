@@ -105,4 +105,3 @@ getStations <- function() {
 ##get the text from the "option" nodes and then trim the whitespace
 #nodes<-trimws(html_text(html_nodes(raw.result, "option")))
 #raw.result <- xmlParse(raw.result, asText = T, isHTML = T)
-#

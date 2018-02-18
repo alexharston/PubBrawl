@@ -13,23 +13,29 @@ library(httr)
 library(lubridate)
 library(shinythemes)
 
+source("./R/getCrime.R")
+source("./R/getRoute.R")
+source("./R/wrapper.R")
 source('./R/pubFinder.R')
 source('./server.R')
 
 # Define API key
-#key <- 'AIzaSyDK0rcvTeq4zig62iTFWSved_FfuKjX0xY'
-key <- 'AIzaSyCVHKD81q7hEu_pAIOtJ50uzaE5GbAfNoA'
+key <- 'AIzaSyDPYgITu5O8Tkr3Nqj8ar-PZxWvugF3aO4'
 set_key(key)
 
 # Get stations
 stations <- getStations()
 
+# Define possible saftey choices
+safety.choices <- data_frame(id = c('unsafe', 'safe', 'carefree'),
+                             type = c('Come at me mate',  'Nah, play it safe', "Whatever I'm easy"))
+
 ui <- fluidPage(
 
-    theme = shinytheme("united"),
+  theme = shinytheme("united"),
   
-    fluidRow(
-      column(12, align="center",
+  fluidRow(
+    column(12, align="center",
       
   
   
@@ -62,8 +68,6 @@ ui <- fluidPage(
           "))
         ),
 
-        # titlePanel('pubcRawl')
-        
         headerPanel("PubBrawl"),
         
         br(),
@@ -75,7 +79,7 @@ ui <- fluidPage(
             tags$p("How many stops?")  
           ),
           sliderInput("number_pints", "",
-                      min = 0, max = 10,
+                      min = 0, max = 12,
                       value = 5)
                  ),
           
@@ -83,9 +87,8 @@ ui <- fluidPage(
                  tags$div(
                    tags$p("Do you want to get into a fight?")  
                  ),
-                 actionButton("unsafe", "Come at me mate"),
-                 actionButton("safe", "Nah, play it safe"),
-                 actionButton("carefree", "Whatever I'm easy")
+                 selectizeInput('safety', '', safety.choices$type, 
+                                selected = safety.choices$type[2])
                  ),
           
           column(width= 4, 
@@ -105,8 +108,8 @@ ui <- fluidPage(
 
   br(),
   br(),
-        
-  #submitButton("Let's Go", icon("refresh")), 
+  
+  # Define submit buttom      
   actionButton('go', "Let's GO!"), 
   
   br(),
