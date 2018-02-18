@@ -1,7 +1,9 @@
+somevariable <- NobbysFunction(){}
+
 server <- function(input, output){
   
   # Define API key
-  key <- 'AIzaSyBaNsBP0XxPQ3Y0V-WMf7fzj9ZSac2nzak'
+  key <- 'AIzaSyAa55bTPXC1akgwWNm61KT43AsmwI9NZuY'
   
   # Test case
   # Start location
@@ -16,7 +18,8 @@ server <- function(input, output){
   
   output$map <- renderGoogle_map({
     google_map(data = pubs, key = key, search_box = T) %>%
-      add_markers(lat = 'lat', lon = 'lng', info_window = 'pub_name')
+      add_markers(lat = 'lat', lon = 'lng', info_window = 'pub_name') %>%
+      add_polylines(polyline = somevariable)
       #add_drawing(drawing_modes = c('circle')) 
   })
   

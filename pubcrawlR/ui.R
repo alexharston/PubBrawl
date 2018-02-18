@@ -9,13 +9,13 @@ library(httr)
 library(lubridate)
 
 # ui <- fluidPage(
-#   titlePanel('HackCity 2018 project - PubCrawlR'),
+#   titlePanel('HackCity 2018 project - PubBrawl'),
 #   google_mapOutput(outputId = "map", height = "800px")
 #   
 # )
 
 # ui <- fluidPage(theme = "bootstrap.css",
-#     titlePanel('HackCity 2018 project - PubCrawlR'),
+#     titlePanel('HackCity 2018 project - PubBrawl'),
 #     google_mapOutput(outputId = "map", height = "800px"),
 #     headerPanel("PubCrawlR"),
 # 
@@ -44,9 +44,9 @@ ui <- fluidPage(
 
       p {
       font-family: Roboto, sans-serif;
-      font-size:48pt;
-      font-weight:600;
-      color: red;
+      font-size:32pt;
+      font-weight:300;
+      color: white;
       text-align: center;
       }
 
@@ -75,6 +75,11 @@ ui <- fluidPage(
   
   actionButton("button", "Yes"),
   actionButton("button", "No"),
+  
+  # Input: Simple integer interval ----
+  sliderInput("integer", "How many pubs?",
+              min = 2, max = 10,
+              value = 1),
   
   google_mapOutput(outputId = "map", height = "600px", width="80%")
 )
