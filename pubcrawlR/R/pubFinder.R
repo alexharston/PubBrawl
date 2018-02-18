@@ -23,11 +23,23 @@ findPubs <- function(x.start, y.start, x.end, y.end, key) {
 
 }
 
-# Query API
-#Url <- 'http://whatpub.com/'
-#Pub.name <- paste('The London Pub', collapse = '+')
-#Path <- 'search?q=pub.name'
-#Path <- 'api/1/GetPubDetails'
-#Raw.result <- GET(url = url, path = path)
-#Raw.result$status_code
-#RawToChar(raw.result$content)
+getStations <- function() {
+  km.file <- './data/stations.kml'
+  stations <- readOGR(km.file) 
+  return(stations)
+}
+
+
+## Query API
+#url <- 'http://whatpub.com/'
+#pub.name <- gsub(' ', '+', 'The London Pub')
+#path <- sprintf('search?q=%s', pub.name)
+#raw.result <- GET(url = file.path(url, path)) # = path)
+#raw.result <- rawToChar(raw.result$content)
+#raw.result <- htmlParse(raw.result)
+#
+##read the html page
+##get the text from the "option" nodes and then trim the whitespace
+#nodes<-trimws(html_text(html_nodes(raw.result, "option")))
+#raw.result <- xmlParse(raw.result, asText = T, isHTML = T)
+#

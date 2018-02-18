@@ -1,9 +1,9 @@
 library(shiny)
-library(shinysky)
 
 library(dplyr)
 library(tidyr)
 library(readr)
+library(rgdal)
 
 library(googleway)
 library(geosphere)
@@ -16,8 +16,11 @@ source('./R/pubFinder.R')
 source('./server.R')
 
 # Define API key
-key <- 'AIzaSyCQRLfT4Svbb0PoG9TKH_aPJiRO6FGSh2c'
+key <- 'AIzaSyDK0rcvTeq4zig62iTFWSved_FfuKjX0xY'
 set_key(key)
+
+# Get stations
+stations <- getStations()
 
 ui <- fluidPage(
   
@@ -77,6 +80,11 @@ ui <- fluidPage(
   sliderInput("integer", "How many pubs?",
               min = 2, max = 10,
               value = 1),
+ 
+  # Text input box 
+  selectizeInput('start', 'Pub crawl start location', stations$Name, selected = 'Camden Town Station'),
+  selectizeInput('end', 'Pub crawl end location', stations$Name, selected = 'Holborn Station'),
+  actionButton('go', 'GO'),
   
   google_mapOutput(outputId = "map", height = "600px", width="80%")
 )
