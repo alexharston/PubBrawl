@@ -64,7 +64,6 @@ server <- function(input, output, session) {
   # df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
   #pubs <- findPubs(x.start, y.start, x.end, y.end, key)
   
-  
   pubs <- findPubs(x.start, y.start, x.end, y.end, key)
      # quality_threshold = sliderValues$Value[sliderValues$Name == "GoogleReview"],
      # number_pints = sliderValues$Value[sliderValues$Name == "NumberPints"])
