@@ -136,7 +136,7 @@ SelectPubs <- function(pubs.crime.dt, number_pints, safe = c("safe", "unsafe", "
 dates <- c(paste0(2016, "-", 10:12), paste0(2017, "-0", 1:9))
 
 # Load pubs
-pubs <- fread("pubs.tsv")
+pubs <- fread("~/HackCity18/pubs.tsv")
 
 # Get crime count
 pubs$crime <- sapply(1:nrow(pubs), function(x) GetNumberOfCrimesPoly(latitude = pubs$lat[x], longitude = pubs$lng[x], year_month = dates, window = 0.002))
