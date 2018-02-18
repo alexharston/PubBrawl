@@ -20,6 +20,37 @@ server <- function(input, output, session) {
   
   start.coord <- c(x.start, y.start)
   end.coord <- c(x.end, y.end)
+
+  sliderValues <- reactive({
+    
+    data.frame(
+      Name = c( "NumberPints",
+                "GoogleReview" ),
+      Value = as.character( c( input$number_pints,
+                               input$google_review ) ),
+      stringsAsFactors = FALSE)
+    
+  })
+
+  
+  # Show the values in an HTML table ----
+  output$values <- renderTable({
+    sliderValues()
+  })
+  
+  safety <- reactiveValues(data = NULL)
+  
+  observeEvent(input$unsafe, {
+    safety  <- "unsafe"
+  })
+  
+  observeEvent(input$safe, {
+    safety  <- "safe"
+  })  
+
+  observeEvent(input$carefree, {
+    safety  <- "carefree"
+  }) 
   
   # Get list of pubs
   # df <- data.frame(id = 1, polyline = encode_pl(lat = c(x.start, x.end), lon = c(y.start, y.end)))
