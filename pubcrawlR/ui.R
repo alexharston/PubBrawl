@@ -99,25 +99,22 @@ ui <- fluidPage(
         
         ),
         
-  
- 
   # Text input box 
   selectizeInput('start', 'Pub crawl start location', stations$Name, selected = 'Camden Town Station'),
   selectizeInput('end', 'Pub crawl end location', stations$Name, selected = 'Holborn Station'),
 
-
-   br(),
-   br(),
+  br(),
+  br(),
         
-   #submitButton("Let's Go", icon("refresh")), 
-   actionButton('go', "Let's GO!"), 
+  #submitButton("Let's Go", icon("refresh")), 
+  actionButton('go', "Let's GO!"), 
   
-        br(),
-        br(),
+  br(),
+  br(),
         
-        google_mapOutput(outputId = "map", height = "600px", width="80%")
-      )
+  google_mapOutput(outputId = "map", height = "600px", width="80%")
   )
+ )
 )
   
 
