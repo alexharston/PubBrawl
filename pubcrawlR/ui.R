@@ -18,6 +18,7 @@ source("./R/getCrime.R")
 source("./R/getRoute.R")
 source("./R/wrapper.R")
 source('./R/pubFinder.R')
+source('./R/hospitalData.R')
 source('./server.R')
 
 # Define API key
