@@ -4,3 +4,5 @@ _pycache_
 
 .Rproj.user
 pubcrawlR/R/hospitalData.R
+www/Screen*
+.Rhistory
